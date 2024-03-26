@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 style="color: red;">Hello</h1>
+    <h1>Hi</h1>
+    <button onclick="change()">press</button>
+    <script>
+        function change() {
+            const num2 = 20
+            const num3 = 30
+            console.log(num2 + num3);
+        }
+
+        function payWithPaystack() {
+
+            var payAmount = "1650";
+            var payEmail = "miracleobafemimo@gmail.com";
+            var payCurrency = "NGN";
+            var handler = PaystackPop.setup({
+                key: "pk_live_a6178cacfd64c453795f90be12e906e79fe4d43a",
+                currency: payCurrency,
+                email: payEmail,
+                amount: payAmount,
+                //  label: "Optional string that replaces customer email",
+                metadata: {
+                    custom_fields: [
+                        {
+                            transactionId: "1710933296",
+                            salt: "a05be7258ce3a7ce93395a714af43fc5"
+                        }
+                    ]
+                },
+                webhook: function (response) {
+                    location.href = "../paymentgateway/paystack/webhook_paystack.php?wallet=1710933296&ref=" + response.reference; console.log(response.reference);
+                },
+                onClose: function () {
+                    //alert"window closed");
+                }
+            });
+            handler.openIframe();
+        }
+        payWithPaystack()
+
+    </script>
+</body>
+
+</html>
