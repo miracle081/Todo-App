@@ -1,25 +1,33 @@
-
-import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { View, Text, Platform, StatusBar, StyleSheet, SafeAreaView, Switch, } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { View, Text, Platform, StatusBar, StyleSheet, SafeAreaView, } from "react-native";
-import { Avatar, Button, Card } from "react-native-paper";
-import { useEffect, useState, useCallback } from "react";
-import { Pacifico_400Regular } from "@expo-google-fonts/pacifico";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faGithub, faInstagram, faTwitter, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { ActivityIndicator, Avatar, Button, Card, MD2Colors, } from "react-native-paper";
+import { useState, useEffect, useCallback } from "react";
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
+import { SedgwickAveDisplay_400Regular } from "@expo-google-fonts/sedgwick-ave-display";
+import { Manrope_400Regular, Manrope_700Bold, Manrope_800ExtraBold } from "@expo-google-fonts/manrope";
+import { Pacifico_400Regular } from "@expo-google-fonts/pacifico";
 
 export function Products() {
-    const [appIsReady, setAppIsReady] = useState(false);
-    const [years, setYears] = useState(2022);
+    const [isSwitchOn, setIsSwitchOn] = useState(false);
+    const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
     const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
 
+    const [appIsReady, setAppIsReady] = useState(false);
+
     useEffect(() => {
         async function prepare() {
             try {
+                await Font.loadAsync({ SedgwickAveDisplay_400Regular });
+                await Font.loadAsync({ Manrope_400Regular });
+                await Font.loadAsync({ Manrope_700Bold });
+                await Font.loadAsync({ Manrope_800ExtraBold });
                 await Font.loadAsync({ Pacifico_400Regular });
-                await new Promise(resolve => setTimeout(resolve, 500));
+                await new Promise(resolve => setTimeout(resolve, 50));
             } catch (e) {
                 console.warn(e);
             } finally {
@@ -28,7 +36,8 @@ export function Products() {
         }
 
         prepare();
-    }, [])
+    }, []);
+
     useCallback(async () => {
         if (appIsReady) {
             await SplashScreen.hideAsync();
@@ -42,26 +51,44 @@ export function Products() {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
-                <Text style={styles.header}>Expo Post</Text>
-                <FontAwesomeIcon icon={faUser} size={50} color="green" />
-                <Button loading={true} icon="account" mode="elevated" onPress={() => setYears(years + 1)}>
-                    Press me
-                </Button>
-
-                <View style={styles.shadow}>
-                    <Card>
-                        <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
-                        <Card.Content>
-                            <Text variant="titleLarge">Card title</Text>
-                            <Text variant="bodyMedium">Card content</Text>
-                        </Card.Content>
-                        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-                        <Card.Actions>
-                            <Button>Cancel</Button>
-                            <Button>Ok</Button>
-                        </Card.Actions>
-                    </Card>
+                <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                    <Text style={{ fontFamily: "Manrope_800ExtraBold", fontSize: 20 }}>Expo Font</Text>
+                    <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
                 </View>
+                <FontAwesomeIcon icon={faUser} size={50} />
+                <View style={styles.social}>
+                    <FontAwesomeIcon icon={faFacebook} size={50} color="#325afa" />
+                    <FontAwesomeIcon icon={faInstagram} size={50} color="#fa32b4" />
+                    <FontAwesomeIcon icon={faTwitter} size={50} color="#325afa" />
+                    <FontAwesomeIcon icon={faWhatsapp} size={50} color="#10d724" />
+                    <FontAwesomeIcon icon={faGithub} size={50} color="#171718" />
+                </View>
+                {
+                    !isSwitchOn ? <ActivityIndicator animating={true} size={100} color={MD2Colors.red800} /> : null
+                }
+
+                <Button
+                    mode="contained-tonal"
+                    onPress={() => console.log("React native")}
+                    loading={false}
+                    icon="camera"
+                >Click here</Button>
+
+                <View style={styles.shadow}></View>
+
+                <Card>
+                    <Card.Title title="Card Title" subtitle="Card Subtitle" />
+                    <Card.Content>
+                        <Text variant="titleLarge">Card title</Text>
+                        <Text variant="bodyMedium">Card content</Text>
+                    </Card.Content>
+                    <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+                    <Card.Actions>
+                        <Button>Cancel</Button>
+                        <Button>Ok</Button>
+                    </Card.Actions>
+                </Card>
+
             </View>
         </SafeAreaView>
     )
@@ -70,24 +97,26 @@ export function Products() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: Platform.OS == "android" ? StatusBar.currentHeight : null,
+        marginTop: StatusBar.currentHeight,
         padding: 20,
     },
-    header: {
-        fontSize: 30,
-        fontFamily: "Pacifico_400Regular",
-        textAlign: "center",
-        color: "green",
+    social: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        marginTop: 20,
+        borderColor: "#ff67c0",
+        borderWidth: 1, padding: 10,
+        borderRadius: 10
     },
     shadow: {
-        padding: 10,
-        marginTop: 30,
-        backgroundColor: "white",
-        borderWidth: 0.5,
+        backgroundColor: "#ffffff",
+        marginVertical: 10,
+        borderRadius: 10,
+        padding: 50,
         elevation: 5,
-        shadowColor: "#262222",
-        shadowOffset: { width: 10, height: 10 },
+        shadowColor: "gray",
         shadowOpacity: 0.6,
         shadowRadius: 5,
+        shadowOffset: { width: 3, height: 3 }
     }
 })

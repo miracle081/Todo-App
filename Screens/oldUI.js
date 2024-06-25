@@ -1,37 +1,81 @@
-import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Text, View, StyleSheet, Image, ImageBackground, ScrollView } from 'react-native';
+import { appStyles } from '../Components/AppStyles';
 
 export function OldUI() {
 
     return (
-        <>
-            <ImageBackground source={require("../assets/Miracle.jpeg")} style={styles.img}>
-                <View style={{ backgroundColor: "#1b099281", padding: 40, height: "100%" }}>
-                    <Text style={styles.header}>React Native</Text>
-                    <Text style={styles.body}>React Native is a cross platform difhvakjf vajshd ,vjahsdvas</Text>
-                    <View style={{ alignItems: "center", }}>
-
+        <ImageBackground style={styles.bg} source={require("../assets/MO.jpg")}>
+            <View style={styles.container}>
+                <ScrollView>
+                    <Text style={{ fontSize: 30, }}>CORE COMPONENTS</Text>
+                    <Text style={styles.text}>React Native provides built-in components ready for use in any project.</Text>
+                    <Image source={require("../assets/Miracle.jpeg")} style={styles.img} resizeMode="cover" />
+                    <View style={appStyles.card}>
+                        <Text style={styles.text}>React Native provides built-in components ready for use in any project.</Text>
                     </View>
-                </View>
-            </ImageBackground>
-        </>
+
+                    <View style={appStyles.card}>
+                        <Text style={styles.text}>
+                            React Native provides built-in components ready for use in any project. React Native provides built-in components ready for use in any project.
+                        </Text>
+                    </View>
+
+                    <View style={appStyles.card}>
+                        <Text style={styles.text}>
+                            React Native provides built-in components ready for use in any project. React Native provides built-in components ready for use in any project. {"\n"}{"\n"}
+                            React Native provides built-in components ready for use in any project.
+                            React Native provides built-in components ready for use in any project. React Native provides built-in components ready for use in any project. {"\n"}
+                            React Native provides built-in components ready for use in any project.
+                        </Text>
+                    </View>
+
+                    <View style={appStyles.card}>
+                        <Text style={styles.text}>
+                            React Native provides built-in components ready for use in any project. React Native provides built-in components ready for use in any project. {"\n"}{"\n"}
+                            React Native provides built-in components ready for use in any project.
+                            React Native provides built-in components ready for use in any project. React Native provides built-in components ready for use in any project. {"\n"}
+                            React Native provides built-in components ready for use in any project.
+                        </Text>
+                    </View>
+
+                    <View style={appStyles.card}>
+                        <Text style={styles.text}>
+                            React Native provides built-in components ready for use in any project. React Native provides built-in components ready for use in any project. {"\n"}
+                            React Native provides built-in components ready for use in any project.
+                        </Text>
+                    </View>
+
+                </ScrollView>
+            </View>
+        </ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
-    header: {
-        color: "white",
-        fontSize: 30,
-        fontWeight: "bold"
+    bg: {
+        flex: 1
     },
-    body: {
-        color: "white",
-        marginTop: 20,
+    container: {
+        flex: 1,
+        backgroundColor: "#0091ff87",
+        padding: 20,
+        marginTop: 50,
+        borderRadius: 20,
+        borderBottomRightRadius: 53,
+        borderBottomLeftRadius: 53,
+        // margin: 10,
+        // height: 300,
+        width: "100%",
+        borderWidth: 5,
+        borderColor: "orangered",
+        borderStyle: "dotted",
+    },
+    text: {
+        fontSize: 15,
+        color: "#2c2c2c"
     },
     img: {
-        width: 600,
-        height: 900,
-        borderRadius: 1000,
-        marginTop: 50,
-
+        width: 200,
+        height: 200,
     }
 })
