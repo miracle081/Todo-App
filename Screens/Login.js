@@ -1,4 +1,4 @@
-import { Button, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View, } from "react-native";
+import { Alert, Button, FlatList, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View, } from "react-native";
 import { useState } from "react"
 
 export function Login() {
@@ -6,26 +6,57 @@ export function Login() {
     // console.log(StatusBar.currentHeight);
     const num = "";
 
+    function displayAlert() {
+        // console.log(ToastAndroid.SHORT);
+        // ToastAndroid.showWithGravity(
+        //     "Login Successful",
+        //     ToastAndroid.SHORT,
+        // )
+        Alert.alert(
+            "Display alert",
+            "Do you want to submit this email for review?",
+            [
+                {
+                    text: "Yes",
+                    onPress: () => { console.log("Yes CLicked") }
+                },
+                { text: "No" }, { text: "don't ask again" }
+            ]
+        )
+    }
+
+
+    const list = [{ title: "Am going to the market", date: "2/2/2024" }];
+
+
     return (
-        <SafeAreaView>
-            <View style={styles.container}>
+        <SafeAreaView style={{ flex: 1 }}>
+            <ScrollView >
+                <View style={styles.container}>
+                    <Text style={styles.header}>Login {num}</Text>
+                    <Text style={styles.text}>Provide you log in details to proceed to the next screen</Text>
 
-                <Text style={styles.header}>Login {num}</Text>
-                <Text style={styles.text}>Provide you log in details to proceed to the next screen</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Email"
+                        onChangeText={(inp) => setEmail(inp)}
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Email"
-                    onChangeText={(inp) => setEmail(inp)}
+                    />
+                    <Text>{eamil}</Text>
 
-                />
-                <Text>{eamil}</Text>
-
-                <Button onPress={() => console.log("Button clicked")} title="Submit" />
-                <TouchableOpacity style={styles.btn} onPress={() => setEmail("ben10@gmail.com")}>
-                    <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>Submit</Text>
-                </TouchableOpacity>
-            </View>
+                    <Button onPress={() => console.log("Button clicked")} title="Submit" />
+                    {/* <View style={{ height: "150%", padding: 50, backgroundColor: "gray" }}></View> */}
+                    <FlatList horizontal
+                        data={list}
+                        renderItem={({ item, index }) => {
+                            return <Text style={styles.list}>{index}.{item.title} {item.date} </Text>
+                        }}
+                    />
+                    <TouchableOpacity style={styles.btn} onPress={() => displayAlert()}>
+                        <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>Submit</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }
@@ -57,5 +88,13 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: "center",
         borderRadius: 40,
+    },
+    list: {
+        color: "green",
+        backgroundColor: "#0358102b",
+        padding: 20,
+        borderRadius: 10,
+        margin: 3,
+        fontSize: 20
     }
 })
