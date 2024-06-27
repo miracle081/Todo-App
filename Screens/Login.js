@@ -2,9 +2,10 @@ import { Button, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, Touchable
 import { useState } from "react"
 
 export function Login() {
-    const [eamil, setEmail] = useState("john@gmail.com")
+    const [eamil, setEmail] = useState("")
     // console.log(StatusBar.currentHeight);
-    const num = "to you account"
+    const num = "";
+
     return (
         <SafeAreaView>
             <View style={styles.container}>
@@ -15,12 +16,13 @@ export function Login() {
                 <TextInput
                     style={styles.input}
                     placeholder="Email"
-                    onChangeText={(inp) => console.log(inp)}
+                    onChangeText={(inp) => setEmail(inp)}
+
                 />
                 <Text>{eamil}</Text>
 
                 <Button onPress={() => console.log("Button clicked")} title="Submit" />
-                <TouchableOpacity style={styles.btn} onPress={() => console.log("Button clicked")}>
+                <TouchableOpacity style={styles.btn} onPress={() => setEmail("ben10@gmail.com")}>
                     <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>Submit</Text>
                 </TouchableOpacity>
             </View>
