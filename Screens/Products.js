@@ -55,7 +55,6 @@ export function Products() {
                     <Text style={{ fontFamily: "Manrope_800ExtraBold", fontSize: 20 }}>Expo Font</Text>
                     <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
                 </View>
-                
                 <FontAwesomeIcon icon={faUser} size={50} />
                 <View style={styles.social}>
                     <FontAwesomeIcon icon={faFacebook} size={50} color="#325afa" />
