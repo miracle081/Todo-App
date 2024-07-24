@@ -78,8 +78,7 @@ export function Position() {
                     {/* <Button mode='contained' onPress={() => setVisibility(visibility ? false : true)} >Activity</Button> */}
                     <Button mode='contained' onPress={() => setVisibility(!visibility)} >Activity</Button>
 
-                    <Text style={styles.text}>Position</Text>
-
+                    <Text style={styles.text}>Position.</Text>
                 </View>
             </ImageBackground>
         </SafeAreaView>
