@@ -1,13 +1,15 @@
-import { View, } from 'react-native';
-import { Position } from './Screens/Position';
+import { Text, View, StyleSheet } from 'react-native';
 import { Login } from './Screens/Login';
 
 
 export default function App() {
   return (
-    <View style={{ flex: 1 }}>
-      <Position />
-      {/* <Login /> */}
+    <View>
+      <Login />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+
+})

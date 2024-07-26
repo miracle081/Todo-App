@@ -1,102 +1,62 @@
-import { Alert, Button, FlatList, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View, } from "react-native";
-import { useState } from "react"
+import { Button, ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { useState } from 'react'
 
 export function Login() {
-    const [eamil, setEmail] = useState("")
-    // console.log(StatusBar.currentHeight);
-    const num = "";
-
-    function displayAlert() {
-        // console.log(ToastAndroid.SHORT);
-        // ToastAndroid.showWithGravity(
-        //     "Login Successful",
-        //     ToastAndroid.SHORT,
-        // )
-        Alert.alert(
-            "Display alert",
-            "Do you want to submit this email for review?",
-            [
-                {
-                    text: "Yes",
-                    onPress: () => { console.log("Yes CLicked") }
-                },
-                { text: "No" }, { text: "don't ask again" }
-            ]
-        )
-    }
-
-
-    const list = [
-        { title: "Am going to the market", date: "2/2/2024" },
-    ];
-
+    const [email, setEmail] = useState("john@gmail.com")
+    let num = "Account";
+    num = "Log in"
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            {/* <ScrollView > */}
+        <ImageBackground source={{ uri: "https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" }}
+            style={styles.bg}
+        >
             <View style={styles.container}>
-                <Text style={styles.header}>Login {num}</Text>
-                <Text style={styles.text}>Provide you log in details to proceed to the next screen</Text>
-
+                <Text style={styles.header}>Log in - {num}</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder="Email"
+                    placeholder="Enter Email"
                     onChangeText={(inp) => setEmail(inp)}
-
                 />
-                <Text>{eamil}</Text>
+                <Text>{email}</Text>
 
-                <Button onPress={() => console.log("Button clicked")} title="Submit" />
-                {/* <View style={{ height: "150%", padding: 50, backgroundColor: "gray" }}></View> */}
-                <TouchableOpacity style={styles.btn} onPress={() => displayAlert()}>
-                    <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>Submit</Text>
+                {/* <Button title="Login" onPress={() => console.log("Button Clicked")} /> */}
+
+                <TouchableOpacity style={styles.button} onPress={() => setEmail("Button Clicked")}>
+                    <Text style={{ fontSize: 20, fontWeight: "bold" }}>Login</Text>
                 </TouchableOpacity>
-                <FlatList horizontal={false}
-                    data={list}
-                    renderItem={({ item, index }) => {
-                        return <Text style={styles.list}>{index}.{item.title} {item.date} </Text>
-                    }}
-                />
             </View>
-            {/* </ScrollView> */}
-        </SafeAreaView>
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: StatusBar.currentHeight, // Android
+        marginTop: 60,
         padding: 20
     },
-    header: {
-        fontSize: 30,
-        fontWeight: "bold",
-        textAlign: "center",
+    bg: {
+        height: "100%"
     },
-    text: {
-        marginTop: 20,
-        fontSize: 18,
-        color: "gray",
+    header: {
+        fontSize: 40,
+        fontWeight: 'bold',
+        textAlign: "center"
     },
     input: {
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: "green",
-        padding: 10,
-        marginTop: 10,
-        borderRadius: 30
-    },
-    btn: {
-        backgroundColor: "green",
-        padding: 10,
-        alignItems: "center",
+        padding: 13,
         borderRadius: 40,
-    },
-    list: {
-        color: "green",
-        backgroundColor: "#0358102b",
-        padding: 20,
-        borderRadius: 10,
-        margin: 3,
+        marginTop: 20,
+        backgroundColor: "#0b9e132c",
+        // color: "white",
         fontSize: 20
+    },
+    button: {
+        backgroundColor: "#0b9e12a1",
+        padding: 15,
+        borderRadius: 50,
+        alignItems: "center",
+        marginTop: 20
     }
 })
