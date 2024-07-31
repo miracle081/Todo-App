@@ -7,24 +7,20 @@ import {
 export function TodoList() {
     const [text, setText] = useState("");
     const [list, setList] = useState([]);
-    console.log(list);
 
-    function AddItem() {
-        setList((pre) => [...pre, { text: text, date: new Date().getTime() }]);
-        // ToastAndroid.show("Item has been added successfuly", ToastAndroid.SHORT)
-        Alert.alert(
-            "Add Item",
-            "Item has been added successfuly",
-            [{ text: "Done", }]
+    function pushText() {
+        const obj = { text, time: new Date().getTime() }
+        setList([...list, obj])
+        Alert.prompt(
+            'Item Added',
+            'Item has been added to the list',
+            [
+                { text: 'Add More', onPress: () => console.log('OK Pressed') },
+                { text: 'Yes', onPress: () => console.log('Yes Pressed') },
+            ]
         )
 
     }
-
-    function deleteItem(id) {
-        const newList = list.filter(item => item.date != id)
-        setList(newList)
-    }
-
 
 
     return (
@@ -38,8 +34,7 @@ export function TodoList() {
                     onChangeText={(inp) => { setText(inp) }}
                 />
 
-                {/* <Button title='Add To List' /> */}
-                <TouchableOpacity onPress={AddItem} style={{
+                <TouchableOpacity onPress={pushText} style={{
                     backgroundColor: "green", borderRadius: 40,
                     padding: 10, alignItems: "center", marginTop: 10
                 }}>
@@ -47,21 +42,19 @@ export function TodoList() {
                 </TouchableOpacity>
 
                 {/* {
-                    list.map(item => {
-                        return <Text key={item.date}>{item.text}</Text>
-                    })
+                    list.map((item) => <Text>{item.text}</Text>)
                 } */}
+
                 <FlatList
                     style={{ flex: 1, marginTop: 20 }}
                     data={list}
                     renderItem={({ item }) => {
-                        console.log(item.text);
                         return (
                             <View style={styles.renderView}>
                                 <Text>{item.text}</Text>
                                 <View style={styles.row}>
-                                    <Text>{new Date(item.date).toDateString()}</Text>
-                                    <TouchableOpacity style={styles.btn} onPress={() => deleteItem(item.date)}>
+                                    <Text>{new Date(item.time).toDateString()}</Text>
+                                    <TouchableOpacity style={styles.btn} >
                                         <Text style={{ color: "white" }}>Delete</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -75,12 +68,12 @@ export function TodoList() {
         </SafeAreaView>
     )
 }
-
+console.log(StatusBar.currentHeight);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        margin: Platform.OS == "android" ? StatusBar.currentHeight : null,
+        marginTop: StatusBar.currentHeight,
         backgroundColor: "#ffffff",
     },
     header: {
