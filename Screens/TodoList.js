@@ -11,7 +11,7 @@ export function TodoList() {
     function pushText() {
         const obj = { text, time: new Date().getTime() }
         setList([...list, obj])
-        Alert.prompt(
+        Alert.alert(
             'Item Added',
             'Item has been added to the list',
             [
